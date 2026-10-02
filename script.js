@@ -7,8 +7,14 @@ function createEl(tag, className, text) {
 
 const header = createEl('header', 'header');
 const arr = [
-    'icons/a.svg', 'icons/a.svg', 'B', 'B', 'C', 'C', 'D', 'D',
-    'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H'
+    'icons/a.svg', 'icons/a.svg',
+    'icons/b.svg', 'icons/b.svg',
+    'icons/c.svg', 'icons/c.svg',
+    'icons/d.svg', 'icons/d.svg',
+    'icons/e.svg', 'icons/e.svg',
+    'icons/f.svg', 'icons/f.svg',
+    'icons/g.svg', 'icons/g.svg',
+    'icons/h.svg', 'icons/h.svg'
 ];
 
 function createGameBoard() {
@@ -18,8 +24,9 @@ function createGameBoard() {
     gameArr = shuffle();
 
     gameArr.forEach(item => {
-        card = createEl('div', 'card', item);
+        card = createEl('div', 'card');
         const img = createEl('img', 'card-image');
+        img.draggable = false;
         img.src = item;
         img.alt = item;
         card.append(img);
@@ -49,25 +56,30 @@ function shuffle() {
 function play() {
     const cards = document.querySelectorAll('.card');
     let count = 0;
-    let firstItem;
+    let opened = false;
+    let firstItem = null;
     cards.forEach(item => {
         item.addEventListener('click', () => {
-            if (count == 0) {
+            if(item.classList.contains('active') || opened){
+                return;
+            }
+            if (!firstItem) {
                 item.classList.add('active');
                 console.log('press 1 time');
                 firstItem = item;
-                count++;
             } else {
                 item.classList.add('active');
+                opened = true;
                 console.log('press 2 time');
                 const timerId = setTimeout(() => {
-                    if (item.textContent !== firstItem.textContent) {
+                    if (firstItem.querySelector('img').src !== item.querySelector('img').src) {
                         firstItem.classList.remove('active');
                         item.classList.remove('active');
                     }
-                    count = 0;
+                    //count = 0;
                     firstItem = null;
-                }, 500);
+                    opened = false;
+                }, 1000);
 
             }
         })
