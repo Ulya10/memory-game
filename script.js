@@ -119,12 +119,13 @@ function createModal() {
 function createWinContent() {
     const winContent = createEl('div', 'modal-content');
     const winHead = createEl('h2', 'modal-title', 'Вы победили! Поздравляем!');
+    const moves = createEl('div', 'modal-moves', `Ходов: ${count}`);
     const modalNewGame = createEl('button', 'btn btn-new', 'Новая игра');
     modalNewGame.addEventListener('click', () => {
         startGame();
         modal.close();
     });
-    winContent.append(winHead, modalNewGame);
+    winContent.append(winHead, moves, modalNewGame);
     return winContent;
 }
 
