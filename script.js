@@ -71,16 +71,17 @@ function play() {
                 item.classList.add('active');
                 opened = true;
                 console.log('press 2 time');
+                interval = (firstItem.querySelector('img').src == item.querySelector('img').src) ? 0 : 1000;
                 const timerId = setTimeout(() => {
                     if (firstItem.querySelector('img').src !== item.querySelector('img').src) {
                         firstItem.classList.remove('active');
                         item.classList.remove('active');
+                    } else {
+                        count++;
                     }
-                    //count = 0;
                     firstItem = null;
                     opened = false;
-                }, 1000);
-
+                }, interval);
             }
         })
     })
