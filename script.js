@@ -153,7 +153,7 @@ function createWinnersContent() {
     const winnersContent = createEl('div', 'modal-content');
     const winHead = createEl('h2', 'modal-title', 'Победители');
     const winInfo = createEl('div', 'win-info');
-    const winClose = createEl('button', 'win-close', 'Закрыть список');
+    const winClose = createEl('button', 'btn win-close', 'Закрыть список');
     const winners = loadWinners();
     if (winners.length === 0) {
         winInfo.textContent = 'Список победителей пуст';
@@ -164,7 +164,8 @@ function createWinnersContent() {
             const day = String(date.getDate()).padStart(2, '0');
             const month = String(date.getMonth() + 1).padStart(2, '0');
             const year = date.getFullYear();
-            winRow.textContent = `${i + 1}. ${item.moves} ходов / ${day}.${month}.${year}`;
+            const word = (item.moves % 10 == 1 && item.moves % 100 !== 11) ? 'ход' : ((item.moves % 10 < 5) && !((item.moves % 100 > 10) && (item.moves % 100 < 15)) ? 'хода' : 'ходов');
+            winRow.textContent = `${i + 1}. ${item.moves} ${word} / ${day}.${month}.${year}`;
             winInfo.append(winRow);
         })
     }
@@ -177,7 +178,7 @@ function updateStats() {
     const movesCount = document.querySelector('.moves-count');
     const foundPairs = document.querySelector('.found-pairs');
     movesCount.textContent = count;
-    foundPairs.textContent = `${found}/8`;
+    foundPairs.textContent = `${found} / 8`;
 }
 
 function shuffle() {

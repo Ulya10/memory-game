@@ -2,7 +2,13 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    color: rgb(4, 61, 61);
+}
+
+body{
+    background: url(travel.jpg) top center / cover no-repeat;
 }
 
 .main {
@@ -12,7 +18,7 @@
     padding: clamp(10px, 2vw, 24px);
     width: min(100%, 1100px);
     margin: 0 auto;
-    background: url(vac-bg.jpg) top center / cover no-repeat;;
+
 }
 
 .header {
@@ -32,7 +38,8 @@
     height: 60px;
     cursor: pointer;
     font-size: 14px;
-    background-color: rgba(35, 188, 248, 0.589);
+    background-color: rgba(35, 216, 248, 0.589);
+    border-radius: 5px;
 }
 
 .board {
@@ -63,8 +70,8 @@
 }
 
 .card-image {
-    width: 60%;
-    height: 60%;
+    width: 70%;
+    height: 70%;
     object-fit: contain;
     opacity: 0;
     transition: opacity 0.2s ease;
@@ -94,7 +101,7 @@
     align-items: center;
     gap: 4px;
     padding: clamp(6px, 1.5vw, 12px);
-    background: rgba(35, 188, 248, 0.589);
+    background-color: rgba(35, 216, 248, 0.589);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
 }
