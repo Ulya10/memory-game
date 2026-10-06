@@ -12,6 +12,7 @@
     padding: clamp(10px, 2vw, 24px);
     width: min(100%, 1100px);
     margin: 0 auto;
+    background: url(vac-bg.jpg) top center / cover no-repeat;;
 }
 
 .header {
@@ -27,10 +28,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: clamp(80px, 20vw, 200px);
+    width: clamp(80px, 30vw, 200px);
     height: 60px;
     cursor: pointer;
     font-size: 14px;
+    background-color: rgba(35, 188, 248, 0.589);
 }
 
 .board {
@@ -39,6 +41,7 @@
     width: min(100%, 800px);
     margin: 0 auto;
     border: 2px solid burlywood;
+    border-radius: 10px;
     gap: clamp(6px, 2vw, 20px);
     padding: clamp(6px, 4vw, 20px);
 }
@@ -55,6 +58,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    background-color: #dff;
+    border-radius: 10px;
 }
 
 .card-image {
@@ -63,6 +68,10 @@
     object-fit: contain;
     opacity: 0;
     transition: opacity 0.2s ease;
+}
+
+.card.active {
+    background-color: #fff;
 }
 
 .card.active .card-image{
@@ -85,8 +94,9 @@
     align-items: center;
     gap: 4px;
     padding: clamp(6px, 1.5vw, 12px);
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(35, 188, 248, 0.589);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
 }
 
 .modal-overlay {
