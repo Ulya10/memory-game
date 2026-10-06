@@ -5,6 +5,7 @@ let firstItem = null;
 let timerId = null;
 let modal = null;
 
+
 function createEl(tag, className, text) {
     const el = document.createElement(tag);
     if (className) el.className = className;
@@ -18,6 +19,9 @@ function createHeader() {
     const leadBtn = createEl('button', 'btn btn-lead', 'Победители');
     header.append(newGameBtn, leadBtn);
     newGameBtn.addEventListener('click', startGame);
+    leadBtn.addEventListener('click', () => {
+        modal.open(createWinnersContent());
+    });
     return header;
 }
 
@@ -31,6 +35,22 @@ const arr = [
     'icons/g.svg', 'icons/g.svg',
     'icons/h.svg', 'icons/h.svg'
 ];
+
+function loadWinners() {
+    const data = localStorage.getItem('winners');
+    if (data === null) {
+        return [];
+    }
+    try {
+        const winners = JSON.parse(data);
+        return Array.isArray(winners) ? winners : [];
+    }
+    catch (err) {
+        localStorage.removeItem('winners');
+        return [];
+    }
+
+}
 
 function createBoard() {
 
@@ -129,6 +149,30 @@ function createWinContent() {
     return winContent;
 }
 
+function createWinnersContent() {
+    const winnersContent = createEl('div', 'modal-content');
+    const winHead = createEl('h2', 'modal-title', 'Победители');
+    const winInfo = createEl('div', 'win-info');
+    const winClose = createEl('button', 'win-close', 'Закрыть список');
+    const winners = loadWinners();
+    if (winners.length === 0) {
+        winInfo.textContent = 'Список победителей пуст';
+    } else {
+        winners.forEach((item, i) => {
+            const winRow = createEl('div');
+            const date = new Date(item.date);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            winRow.textContent = `${i + 1}. ${item.moves} ходов / ${day}.${month}.${year}`;
+            winInfo.append(winRow);
+        })
+    }
+    winClose.addEventListener('click', modal.close)
+    winnersContent.append(winHead, winInfo, winClose);
+    return winnersContent;
+}
+
 function updateStats() {
     const movesCount = document.querySelector('.moves-count');
     const foundPairs = document.querySelector('.found-pairs');
@@ -170,6 +214,13 @@ function play() {
                     opened = false;
                     if (found == 8) {
                         modal.open(createWinContent());
+                        let winners = loadWinners();
+                        let now = new Date();
+                        const winner = { moves: count, date: Date.now() };
+                        winners.push(winner);
+                        winners.sort((a, b) => a.moves - b.moves || a.date - b.date);
+                        winners = winners.slice(0, 10);
+                        localStorage.setItem('winners', JSON.stringify(winners));
                     }
 
                 } else {
@@ -179,7 +230,7 @@ function play() {
                         firstItem = null;
                         opened = false;
                         timerId = null;
-                    }, 1000);
+                    }, 700);
                 }
                 updateStats();
             }
