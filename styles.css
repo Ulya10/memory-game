@@ -1,0 +1,143 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    color: rgb(4, 61, 61);
+}
+
+body{
+    background: url(travel.jpg) top center / cover no-repeat;
+}
+
+.main {
+    display: flex;
+    gap: clamp(12px, 2vw, 24px);
+    justify-content: center;
+    padding: clamp(10px, 2vw, 24px);
+    width: min(100%, 1100px);
+    margin: 0 auto;
+
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    gap: clamp(12px, 2vw, 24px);
+    padding: 10px;
+}
+
+.btn {
+    border: 2px solid burlywood;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(80px, 30vw, 200px);
+    height: 60px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: rgba(35, 216, 248, 0.589);
+    border-radius: 5px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: min(100%, 800px);
+    margin: 0 auto;
+    border: 2px solid burlywood;
+    border-radius: 10px;
+    gap: clamp(6px, 2vw, 20px);
+    padding: clamp(6px, 4vw, 20px);
+}
+
+
+.card {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    color: rgba(00, 00, 00, 0);
+    overflow: hidden;
+    border: 1px solid rosybrown;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #dff;
+    border-radius: 10px;
+}
+
+.card-image {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.card.active {
+    background-color: #fff;
+}
+
+.card.active .card-image{
+    opacity: 1;
+}
+
+.stats {
+    display: flex;
+    flex: 1 1 180px;
+    max-width: 240px;
+    flex-direction: column;
+    gap: clamp(8px, 2vw, 16px);
+    padding: clamp(8px, 2vw, 16px);
+    justify-content: center;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: clamp(6px, 1.5vw, 12px);
+    background-color: rgba(35, 216, 248, 0.589);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.modal {
+    border-radius: 16px;
+    padding: clamp(20px, 3vw, 32px);
+    width: min(100%, 480px);
+    background-color: lightblue;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(12px, 2vw, 20px);
+}
+
+@media (max-width: 600px){
+    .main{
+        flex-direction: column;
+        align-items: center;
+    }
+}
